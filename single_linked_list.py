@@ -45,9 +45,9 @@ class LList:
             self._head = LNode(elem, None)
             return
         p = self._head
-        while p.next_ is not None:
+        while p.next is not None:
             p = p.next
-        p.next_ = LNode(elem, None)
+        p.next = LNode(elem, None)
 
     def pop_last(self):
         if self._head is None:
@@ -56,7 +56,7 @@ class LList:
         if p.next is None:
             e = p.elem
             return e
-        while p.next_.next is not None:
+        while p.next.next is not None:
             p = p.next
         e = p.next.elem
         p.next = None
@@ -126,7 +126,7 @@ class LList1(LList):
             e = p.elem
             self._head = None
             return e
-        while p.next_.next is not None:
+        while p.next.next is not None:
             p = p.next
         e = p.next.elem
         p.next = None
@@ -194,3 +194,149 @@ if __name__ == '__main__':
         mlist1.append(i)
 
     mlist1.printall()
+
+
+#带反转和排序的单链表模块
+
+class LList:
+    def __init__(self):
+        self._head = None
+
+    def isEmpty(self):
+        return self.head is None
+
+    def prepend(self, elem):
+        self.head = LNode(elem, self._head)
+
+    def pop(self):
+        if self._head is None:
+            raise ValueError
+        e = self._head.elem
+        self._head = self._head.next
+        return e
+
+    def append(self, elem):
+        if self._head is None:
+            self._head = LNode(elem, None)
+            return
+        p = self._head
+        while p.next is not None:
+            p = p.next
+        p.next = LNode(elem, None)
+
+    def  pop_last(self):
+        if self._head is None:
+            raise ValueError
+        p = self._head
+        if p.next is None:
+            e = p.elem
+            self._head = None
+            return e
+        while p.next.next is not None:
+            p = p.next
+        e = p.next.elem
+        p.next = None
+        return e
+
+    def printall(self):
+        p = self._head
+        while p is not None:
+            print(p.elem, end='')
+            if p.next is not None:
+                print(',', end='')
+            p = p.next
+        print('')
+
+    def rev(self):
+        p = None
+        while self._head is not None:
+            q = self._head
+            self._head = q.next
+            q.next = p
+            p = q
+        self._head = p
+
+    def sort1(self): #移动表中元素
+        if self._head is None:
+            return
+        crt = self._head.next
+        while crt is not None:
+            x, p = crt.elem, self._head
+            while p is not crt and p.elem <= x:
+                p = p.next
+                while p is not crt:
+                    y = p.elem
+                    p.elem = x
+                    x = y
+                    p = p.next
+                crt.elem = x
+                crt = crt.next
+
+    def sort2(self): #调整结点之间的连接关系
+        if self._head is None:
+            return
+        last = self._head
+        crt = last.next
+        while crt is not None:
+            p = self._head
+            q = None
+            while p is not crt and p.elem <= crt.elem:
+                q = p
+                p = p.next
+            if p is crt:
+                last = crt
+            else:
+                last.next = crt.next
+                crt.next = p
+                if q is None:
+                    self._head = crt
+                else:
+                    q.next = crt
+            crt = last.next
+
+
+
+if __name__ == '__main__':
+    mlist1 = LList()
+
+    for i in range(10):
+        mlist1.prepend(i)
+
+    for i in range(11, 20):
+        mlist1.append(i)
+
+    mlist1.printall()
+
+    for i in range(5):
+        print(mlist1.pop())
+        print(mlist1.poplast())
+
+    print('remained:')
+    mlist1.printall()
+
+    mlist1.rev()
+    print('\nreversed:')
+    mlist1.printall()
+
+    mlist1.sort2()
+    print('\nsorted:')
+    mlist1.printall()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
