@@ -3,8 +3,8 @@
 #结点类模块
 
 class LNode:
-    def __init__(self, elm, nxt):
-        self.elem = elm
+    def __init__(self, elem, nxt):
+        self.elem = elem
         self.next = nxt
 
 # if __name__ == '__main__':
