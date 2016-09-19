@@ -3,9 +3,9 @@
 #结点类模块
 
 class LNode:
-    def __init__(self, elem, nxt):
+    def __init__(self, elem, next):
         self.elem = elem
-        self.next = nxt
+        self.next = next
 
 # if __name__ == '__main__':
 #     llist1 = LNode(1, None)
