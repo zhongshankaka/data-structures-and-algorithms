@@ -41,4 +41,3 @@ class SQueue():
         for i in range(old_len):
             new_elems[i] = self.elems[(self.head+i) % old_len]
         self.elems, self.head = new_elems, 0
-        
