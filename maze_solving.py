@@ -95,6 +95,69 @@ def maze_solver(maze, start, end):
     print("No path found.")
 
 
+# 使用队列
+
+def maze_solver_queue(maze, start, end):
+    if start == end:
+        print("Path finds.")
+        return
+    qu = SQueue()
+    mark(maze, start)
+    qu.enqueue(start)
+    while not qu.is_empty():
+        pos = qu.dequeue()
+        for i in range(4):
+            nextp = (pos[0] + dirs[i][0],
+                     pos[1] + dirs[i][1])
+            if passable(maze, nextp):
+                if nextp == end:
+                    print("Path finds.")
+                    return
+                mark(maze, nextp)
+                qu.enqueue(nextp)
+    print("No path.")
+
+
+# 返回路径
+
+def build_path(start, pos, end, precedent):
+    path = [end]
+    while pos != start:
+        path.append(pos)
+        pos = precedent[pos] #得到前一位置
+    path.append(start)
+    path.reverse()
+    return path
+
+def maze_solver_queue1(maze, start, end):
+    if start == end:
+        return [start]
+    qu = SQueue()
+    precedent = dict()
+    mark(maze, start)
+    qu.enqueue(start)
+    while not qu.is_empty():
+        pos = qu.dequeue()
+        for i in range(4):
+            nextp = (pos[0] + dirs[i][0],
+                     pos[1] + dirs[i][1])
+            if passable(maze, nextp):
+                if nextp == end:
+                    return build_path(start, pos, end, precedent)
+                mark(maze, nextp)
+                precedent[nextp] = pos #在dict中记录前一位置
+                qu.enqueue(nextp)
+    print("No path.")
+
+
+
+
+
+
+
+
+
+
 
 
 
