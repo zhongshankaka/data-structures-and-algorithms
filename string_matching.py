@@ -15,7 +15,7 @@ def naive_matching(t, p):
     return -1
 
 
-#KMP算法
+# KMP算法
 
 def gen_pnext(p):
     i, k, m = 0, -1, len(p)

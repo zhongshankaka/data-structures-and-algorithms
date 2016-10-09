@@ -47,6 +47,22 @@ def postorder(t, proc):
     proc(t.data)
 
 
+# 宽度优先遍历
+
+from queue_class import *
+
+def levelorder(t, proc):
+    q = SQueue()
+    q.enqueue(t)
+    while not q.is_empty():
+        n = q.dequeue()
+        if t is None:
+            q.enqueue(t.left)
+            q.enqueue(t.right)
+            proc(t.data)
+
+
+
 # 深度优先遍历
 
 from stack_class import *
@@ -93,8 +109,17 @@ def postorder_nonrec(t, proc):
         if not s.is_empty() and s.top().left == t:
             t = s.top().right
         else:
-            t = None
+            t = None #没有右子树，强迫退栈
 
+
+def print_BiTNodes(t):
+    if t is None:
+        print("^", end="")
+        return
+    print("(" + str(t.data), end="")
+    print_BiTNodes(t.left)
+    print_BiTNodes(t.right)
+    print(")", end="")
 
 
 class BiTree:
