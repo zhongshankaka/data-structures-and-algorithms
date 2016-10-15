@@ -29,5 +29,4 @@ def bisearch(lst, key):
         else:
             low = mid + 1
 
-# 哈希表
 

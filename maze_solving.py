@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from stack_class import *
-from queue_class import *
+from stack_class import SStack
+from queue_class import SQueue
 
 maze1 = [
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],

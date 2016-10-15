@@ -295,8 +295,8 @@ class LList:
             crt = last.next
 
 
-
 if __name__ == '__main__':
+
     mlist1 = LList()
 
     for i in range(10):

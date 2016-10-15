@@ -4,9 +4,10 @@
 class BiTNodeError(ValueError):
     pass
 
+# 结点类
 
 class BiTNode:
-    def __init__(self, data, left, right):
+    def __init__(self, data, left=None, right=None):
         self.data = data
         self.left = left
         self.right = right
@@ -120,6 +121,9 @@ def print_BiTNodes(t):
     print_BiTNodes(t.left)
     print_BiTNodes(t.right)
     print(")", end="")
+
+
+# 二叉树类的实现
 
 
 class BiTree:
