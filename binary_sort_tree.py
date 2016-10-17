@@ -282,3 +282,64 @@ class DictAVL(DictBTree):
             b.bf = 0
         c.bf = 0
         return c
+
+    def insert(self, key, value):
+        a = p = self._root  # a为距插入位置最近的平衡因子非0的结点
+        if a is None:
+            self._root = AVLNode(Assoc(key, value))
+            return
+        pa = q = None  # pa为a的父结点，q为p的父结点
+        while p is not None:
+            if key == p.data.key:
+                p.data.value = value
+                return
+            if p.bf != 0:
+                pa, a = q, p
+            q = p
+            if key < p.data.key:
+                p = p.left
+            else:
+                p = p.right
+        node = AVLNode(Assoc(key, value))
+        if key < q.data.key:
+            q.left = node
+        else:
+            q.right = node
+        if key < a.data.key:
+            p = b = a.left  # b为a的子结点
+            d = 1
+        else:
+            p = b = a.right
+            d = -1
+        while p != node:
+            if key < p.data.key:
+                p.bf = 1
+                p = p.left
+            else:
+                p.bf = -1
+                p = p.right
+        if a.bf == 0:
+            a.bf = d
+            return
+        if a.bf == -d:
+            a.bf = 0
+            return
+        if d == 1:
+            if b.bf == 1:
+                b = DictAVL.LL(a, b)
+            else:
+                b = DictAVL.LR(a, b)
+        else:
+            if b.bf == -1:
+                b = DictAVL.RR(a, b)
+            else:
+                b = DictAVL.RL(a, b)
+
+        if pa is None:
+            self._root = b
+        else:
+            if pa.left == a:
+                pa.left = b
+            else:
+                pa.right = b
+
